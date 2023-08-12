@@ -1,0 +1,16 @@
+name: First
+on: push
+jobs:
+  check-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        arg1: ["", "-e"]
+        arg2: ["a", "b"]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: python main.py ${{ matrix.arg1 }} -x ${{ matrix.arg2 }}
